@@ -20,21 +20,21 @@ results = []
 
 # [2, 2, 2, 2] 8
 
-def backtrack(start_index, path):
+def backtrack(start_index, current_sum, path):
     global target
     global candidates
-    if sum(path) == target:
+    if current_sum == target:
         results.append(path[:])
         return
-    if sum(path) > target:
+    if current_sum > target:
         return
     
     # traversal logic
     for i in range(start_index, len(candidates)):
-        if candidates[i] + sum(path) > target:
+        if candidates[i] + current_sum > target:
             break # skip [2,2,2,3...]
         path.append(candidates[i])
-        backtrack(i, path)
+        backtrack(i, current_sum + candidates[i], path)
         path.pop()
 
 backtrack(0, [])
